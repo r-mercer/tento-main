@@ -3,6 +3,7 @@
 Still need to port forward
 `kubectl port-forward -n tento svc/tento-mongodb-svc 27017:27017`
 
+
 ## Helm
 
 - helm repo add bitnami https://charts.bitnami.com/bitnami
