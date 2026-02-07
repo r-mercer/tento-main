@@ -1,0 +1,6 @@
+[submodule "components/ui/tento-web"]
+	path = components/ui/tento-web
+	url = git@github.com:r-mercer/tento-web.git
+[submodule "components/api/tento-server"]
+	path = components/api/tento-server
+	url = git@github.com:r-mercer/tento-server.git

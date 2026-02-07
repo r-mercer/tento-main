@@ -1,0 +1,38 @@
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: tento-mongodb
+  namespace: tento
+spec:
+  members: 1
+  type: ReplicaSet
+  version: "5.0.14"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: devUser
+      db: tento-local
+      passwordSecretRef:
+        name: tento-secret
+        key: mongodb-passwords
+      roles:
+        - name: dbOwner
+          db: tento-local
+        - name: clusterMonitor
+          db: admin
+      scramCredentialsSecretName: devuser-scram
+  statefulSet:
+    spec:
+      volumeClaimTemplates:
+        - metadata:
+            name: data-volume
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            storageClassName: hostpath
+            resources:
+              requests:
+                storage: 10Gi
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
