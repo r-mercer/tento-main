@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: set-vm-max-map-count
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: set-vm-max-map-count
+  template:
+    metadata:
+      labels:
+        name: set-vm-max-map-count
+    spec:
+      hostPID: true
+      initContainers:
+      - name: set-max-map-count
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          set -e
+          sysctl -w vm.max_map_count=1677720
+          echo "vm.max_map_count set to 1677720"
+        securityContext:
+          privileged: true
+      containers:
+      - name: pause
+        image: registry.k8s.io/pause:3.9
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi

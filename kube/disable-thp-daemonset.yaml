@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: disable-transparent-hugepages
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: disable-transparent-hugepages
+  template:
+    metadata:
+      labels:
+        name: disable-transparent-hugepages
+    spec:
+      hostPID: true
+      initContainers:
+      - name: disable-thp
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          set -e
+          echo never > /host-sys/kernel/mm/transparent_hugepage/enabled
+          echo never > /host-sys/kernel/mm/transparent_hugepage/defrag
+          echo "Transparent huge pages disabled"
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: host-sys
+          mountPath: /host-sys
+      containers:
+      - name: pause
+        image: registry.k8s.io/pause:3.9
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+      volumes:
+      - name: host-sys
+        hostPath:
+          path: /sys
+          type: Directory

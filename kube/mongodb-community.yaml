@@ -7,7 +7,7 @@ metadata:
 spec:
   members: 1
   type: ReplicaSet
-  version: "5.0.14"
+  version: "7.0.14"
   security:
     authentication:
       modes: ["SCRAM"]
@@ -20,6 +20,8 @@ spec:
       roles:
         - name: dbOwner
           db: tento-local
+        - name: clusterAdmin
+          db: admin
         - name: clusterMonitor
           db: admin
       scramCredentialsSecretName: devuser-scram
