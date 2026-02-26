@@ -189,8 +189,8 @@ npm run build
 ```bash
 WEB_SERVER_HOST=127.0.0.1
 WEB_SERVER_PORT=8080
-MONGODB_URI=mongodb://localhost:27017
-MONGODB_DATABASE=tento
+MONGO_CONN_STRING=mongodb://localhost:27017
+MONGO_DB_NAME=tento
 JWT_SECRET=your-secret-key
 JWT_EXPIRATION_HOURS=1
 JWT_REFRESH_EXPIRATION_HOURS=168
@@ -269,6 +269,7 @@ See [API Reference](./api-reference.md) for complete documentation.
 - Format: `cargo fmt`
 - Lint: `cargo clippy`
 - Test: `cargo test`
+- Contract tests: `cargo test --test repository_contract_tests`
 
 **Frontend (TypeScript):**
 - Lint: `npm run lint`
@@ -313,4 +314,4 @@ For questions or issues:
 
 ---
 
-Last updated: 2026-02-11
+Last updated: 2026-02-26

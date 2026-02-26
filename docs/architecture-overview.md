@@ -141,7 +141,9 @@ Tento is a full-stack web application built with a modern microservices-oriented
 #### 5. GraphQL (`src/graphql/`)
 - **Purpose**: GraphQL API implementation
 - **Components**:
-  - `schema.rs` - GraphQL schema definition
+  - `mod.rs` - GraphQL module exports and schema factory
+  - `schema_impl/queries.rs` - Query resolvers
+  - `schema_impl/mutations.rs` - Mutation resolvers
   - Query and mutation resolvers
 - **Responsibilities**: GraphQL query execution
 
@@ -161,6 +163,7 @@ Tento is a full-stack web application built with a modern microservices-oriented
 - **Purpose**: Global state management
 - **Components**:
   - `AuthContext.tsx` - Authentication state
+  - `ThemeContext.tsx` - Theme preference and resolved theme state
 - **Responsibilities**: User session, login/logout
 
 #### 3. Hooks (`src/hooks/`)

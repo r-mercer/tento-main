@@ -713,7 +713,9 @@ const updateUser = useMutation({
 
 ## Testing Strategy
 
-**Recommended Setup:**
+**Current Status:** Frontend test framework is not configured in this repository.
+
+**Recommended Setup (Planned):**
 
 1. **Unit Tests:** Vitest
 2. **Component Tests:** React Testing Library

@@ -792,7 +792,7 @@ pub fn require_owner_or_admin(
 # Backend (.env.local)
 JWT_SECRET=<random-secret-key>
 GH_CLIENT_SECRET=<github-oauth-secret>
-MONGODB_URI=<database-connection-string>
+MONGO_CONN_STRING=<database-connection-string>
 
 # Frontend (.env)
 VITE_GH_CLIENT_ID=<github-oauth-client-id>

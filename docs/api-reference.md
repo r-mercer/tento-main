@@ -56,8 +56,11 @@ All requests and responses use `application/json` content type.
 
 No authentication required:
 - `GET /health`
+- `GET /health/ready`
+- `GET /health/live`
 - `GET /auth/github/callback`
 - `POST /auth/refresh`
+- `POST /auth/logout`
 
 ### Protected Endpoints
 
@@ -608,6 +611,18 @@ type Mutation {
 **Credentials:** Supported
 
 ## Testing Endpoints
+
+### Backend Test Commands
+
+```bash
+cd components/api/tento-server
+
+# Run all tests
+cargo test
+
+# Run repository contract tests
+cargo test --test repository_contract_tests
+```
 
 ### Using curl
 

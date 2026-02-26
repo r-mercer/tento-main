@@ -42,8 +42,8 @@ WEB_SERVER_HOST=127.0.0.1
 WEB_SERVER_PORT=8080
 
 # Database Configuration
-MONGODB_URI=mongodb://localhost:27017
-MONGODB_DATABASE=tento
+MONGO_CONN_STRING=mongodb://localhost:27017
+MONGO_DB_NAME=tento
 
 # JWT Configuration
 JWT_SECRET=your-secret-key-here-change-in-production
@@ -113,7 +113,7 @@ nano .env.local
 **Required changes:**
 - Set `JWT_SECRET` to a random string
 - Set `GH_CLIENT_ID` and `GH_CLIENT_SECRET` (see GitHub OAuth Setup)
-- Configure `MONGODB_URI` if not using default
+- Configure `MONGO_CONN_STRING` if not using default
 
 ### Step 4: Build and Run
 
@@ -386,6 +386,9 @@ curl http://localhost:8080/api/users \
 # Run tests
 cargo test
 
+# Run repository contract tests
+cargo test --test repository_contract_tests
+
 # Format code
 cargo fmt
 
@@ -483,7 +486,8 @@ docker build -t tento-server .
 docker run -d \
   --name tento-api \
   -p 8080:8080 \
-  -e MONGODB_URI=mongodb://mongo:27017 \
+  -e MONGO_CONN_STRING=mongodb://mongo:27017 \
+  -e MONGO_DB_NAME=tento \
   -e JWT_SECRET=<production-secret> \
   -e GH_CLIENT_ID=<client-id> \
   -e GH_CLIENT_SECRET=<client-secret> \
@@ -549,7 +553,8 @@ server {
 ```bash
 WEB_SERVER_HOST=0.0.0.0
 WEB_SERVER_PORT=8080
-MONGODB_URI=mongodb://production-host:27017
+MONGO_CONN_STRING=mongodb://production-host:27017
+MONGO_DB_NAME=tento
 JWT_SECRET=<strong-random-secret-64-chars>
 JWT_EXPIRATION_HOURS=1
 JWT_REFRESH_EXPIRATION_HOURS=168
@@ -682,7 +687,7 @@ Error: E11000 duplicate key error collection: tento.users index: username_1
 1. Check MongoDB is running
 2. Verify network connectivity
 3. Check firewall rules
-4. Increase connection timeout in `MONGODB_URI`
+4. Increase connection timeout in `MONGO_CONN_STRING`
 
 ### Token Refresh Issues
 
@@ -708,6 +713,9 @@ Error: E11000 duplicate key error collection: tento.users index: username_1
 ```bash
 # Run tests
 cargo test
+
+# Run repository contract tests
+cargo test --test repository_contract_tests
 
 # Run with debug logging
 RUST_LOG=debug cargo run
