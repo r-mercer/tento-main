@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Quiz",
+  "description": "A quiz with questions and scoring configuration",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier (UUID)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Friendly name for the quiz"
+    },
+    "created_by_user_id": {
+      "type": "string",
+      "description": "User who created the quiz"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Display title"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Quiz description"
+    },
+    "question_count": {
+      "type": "integer",
+      "description": "Number of questions in the quiz"
+    },
+    "required_score": {
+      "type": "integer",
+      "description": "Minimum score (percentage) to pass"
+    },
+    "attempt_limit": {
+      "type": "integer",
+      "description": "Maximum number of attempts allowed"
+    },
+    "topic": {
+      "type": ["string", "null"],
+      "description": "Topic or category tag"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Pending", "Ready", "Complete"],
+      "description": "Quiz lifecycle status"
+    },
+    "questions": {
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "#/definitions/QuizQuestion"
+      },
+      "description": "List of questions (null until quiz is finalized)"
+    },
+    "url": {
+      "type": "string",
+      "description": "Source URL for quiz content"
+    },
+    "created_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp of creation"
+    },
+    "modified_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp of last modification"
+    }
+  },
+  "required": ["id", "name", "created_by_user_id", "question_count", "required_score", "attempt_limit", "status", "url"],
+  "definitions": {
+    "QuizQuestion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Question unique identifier"
+        },
+        "title": {
+          "type": "string",
+          "description": "Question title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Question description or prompt"
+        },
+        "question_type": {
+          "type": "string",
+          "enum": ["Single", "Multi", "Bool"],
+          "description": "Single = one correct, Multi = multiple correct, Bool = True/False"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuizQuestionOption"
+          },
+          "description": "Available answer options"
+        },
+        "option_count": {
+          "type": "integer",
+          "description": "Number of options (default 4)"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Question order in the quiz"
+        },
+        "attempt_limit": {
+          "type": "integer",
+          "description": "Max attempts for this question"
+        },
+        "topic": {
+          "type": "string",
+          "description": "Question topic/category"
+        },
+        "created_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "modified_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "title", "description", "question_type", "options", "option_count", "order", "attempt_limit", "topic"]
+    },
+    "QuizQuestionOption": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Option unique identifier"
+        },
+        "text": {
+          "type": "string",
+          "description": "Option text"
+        },
+        "correct": {
+          "type": "boolean",
+          "description": "Whether this is a correct answer"
+        },
+        "explanation": {
+          "type": "string",
+          "description": "Explanation for why this option is correct/incorrect"
+        }
+      },
+      "required": ["id", "text", "correct", "explanation"]
+    }
+  }
+}
