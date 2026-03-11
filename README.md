@@ -1,9 +1,51 @@
-# tento-main
+# Tento
 
-Monorepo for Tento:
+A full-stack quiz application with a Rust backend API and React frontend.
 
-- Backend API: [components/api/tento-server](components/api/tento-server/README.md)
-- Frontend app: [components/ui/tento-web](components/ui/tento-web/README.md)
+## Features
+
+- Quiz creation and management
+- GitHub OAuth authentication
+- JWT-based session management with token refresh
+- REST and GraphQL APIs
+- Role-based access control (user/admin)
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 19, TypeScript, Vite, TanStack Query, Fluent UI |
+| Backend | Rust, Actix-web, async-graphql, MongoDB |
+| Auth | GitHub OAuth 2.0, JWT |
+
+## Prerequisites
+
+- **Backend**: Rust (latest stable), MongoDB
+- **Frontend**: Node.js 20+, npm
+
+## Configuration
+
+### Backend
+
+Create `components/api/tento-server/.env` with required environment variables (see [backend README](components/api/tento-server/README.md) for full list):
+
+```bash
+MONGO_CONN_STRING=mongodb://localhost:27017
+MONGO_DB_NAME=tento
+GH_CLIENT_ID=your-github-client-id
+GH_CLIENT_SECRET=your-github-client-secret
+JWT_SECRET=your-secret-key
+```
+
+### Frontend
+
+Create `components/ui/tento-web/.env`:
+
+```bash
+VITE_API_BASE_URL=http://localhost:8080
+VITE_GH_CLIENT_ID=your-github-client-id
+VITE_GH_REDIRECT_URI=http://localhost:5173/auth/callback
+```
 
 ## Quick Start
 

@@ -2,3 +2,6 @@
 .github
 .idea
 .models
+.env
+.env.*
+!.env.example

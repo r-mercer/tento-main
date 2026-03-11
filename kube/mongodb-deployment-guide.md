@@ -133,12 +133,12 @@ In this deployment: `tento-mongodb-tento-local-devuser`
 
 **Standard Connection String:**
 ```
-mongodb://devUser:LOCALPASSWORD@tento-mongodb-0.tento-mongodb-svc.tento.svc.cluster.local:27017/tento-local?replicaSet=tento-mongodb&ssl=false
+mongodb://devUser:<password>@tento-mongodb-0.tento-mongodb-svc.tento.svc.cluster.local:27017/tento-local?replicaSet=tento-mongodb&ssl=false
 ```
 
 **SRV Connection String:**
 ```
-mongodb+srv://devUser:LOCALPASSWORD@tento-mongodb-svc.tento.svc.cluster.local/tento-local?replicaSet=tento-mongodb&ssl=false
+mongodb+srv://devUser:<password>@tento-mongodb-svc.tento.svc.cluster.local/tento-local?replicaSet=tento-mongodb&ssl=false
 ```
 
 ### Using Connection Strings in Applications
